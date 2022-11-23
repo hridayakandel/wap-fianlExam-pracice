@@ -12,7 +12,7 @@ const productController = (function () {
         return productDAO.getProducts();
     }
     const addNewProduct = function (req, res) {
-        const productId = productDAO.getProducts().length + 1;
+        const productId = 1;
         const productNo = req.body.productNo;
         const productName = req.body.productName;
         const unitPrice = req.body.unitPrice;

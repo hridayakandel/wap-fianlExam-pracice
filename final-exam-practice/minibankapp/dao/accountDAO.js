@@ -7,17 +7,14 @@
 const Account = require("../model/accountModel");
 
 const accountDAO = (function () {
-    const accounts = [
-        new Account("1", "1001", "Hridaya", "Checking"),
-        new Account("2", "1002", "Samir", "Saving"),
-        new Account("2", "1002", "Samir", "Saving")
-    ];
-
+    const accounts = [];
+    console.log(accounts);
     const getAccount = function () {
         // console.log("daoAcount=====" + accounts);
         return accounts;
     }
     const saveAccounts = function (account) {
+        console.log(account);
         accounts.push(account);
     };
     return {

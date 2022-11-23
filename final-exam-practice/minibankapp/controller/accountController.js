@@ -5,17 +5,20 @@
 "use strict";
 
 const accountDAO = require("../dao/accountDAO");
-const Account = require("../model/accountModel");
+const Account = require("../model/accountModel")
 
 const accountController = (function () {
+
     const getAccount = function (req, res) {
-        //console.log("controller===" + accountDAO.getAccount())
+        console.log("================");
+        console.log(accountDAO.getAccount());
         return accountDAO.getAccount();
     }
+
     const addNewAccount = function (req, res) {
-        console.log("=====id" + accountDAO.getAccount().length);
-        const accountId = "1";
-        console.log("=====id" + accountId);
+        console.log("hello from controller");
+        console.log(accountDAO.getAccount().length);
+        const accountId = accountDAO.getAccount().length + 1;
         const txtAccountNo = req.body.txtAccountNo;
         const txtCustomerName = req.body.txtCustomerName;
         const ddlAccountType = req.body.ddlAccountType;

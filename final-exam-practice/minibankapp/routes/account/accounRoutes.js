@@ -12,8 +12,14 @@ const accountController = require("../../controller/accountController");
 
 const accountRoutes = express.Router();
 
-accountRoutes.get("/account", (req, res) => {
-    res.sendFile(path.join(__dirname, "../../views/account", "account.html"));
+// accountRoutes.get("/account", (req, res) => {
+//     res.sendFile(path.join(__dirname, "../../views/account", "account.html"));
+// });
+
+accountRoutes.post("/account", (req, res) => {
+    console.log("button click");
+    accountController.addNewAccount(req, res);
+    res.redirect(303, "new");
 });
 
 accountRoutes.get("/new", (req, res) => {
@@ -25,10 +31,7 @@ accountRoutes.get("/new", (req, res) => {
 
 
 
-accountRoutes.post("/new/add", (req, res) => {
-    accountController.addNewAccount(req, res);
-    res.redirect(303, "new");
-});
+
 
 
 module.exports = accountRoutes;
