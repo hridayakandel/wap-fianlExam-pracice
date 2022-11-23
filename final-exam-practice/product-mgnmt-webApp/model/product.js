@@ -3,10 +3,10 @@
  */
 "use strict";
 
-function Product(productId, productNo, name, unitPrice) {
+function Product(productId, productNo, productName, unitPrice) {
     this.productId = productId;
     this.productNo = productNo;
-    this.name = name;
+    this.productName = productName;
     this.unitPrice = unitPrice;
 }
 module.exports = Product;
