@@ -30,8 +30,4 @@ accountRoutes.get("/new", (req, res) => {
 });
 
 
-
-
-
-
 module.exports = accountRoutes;
