@@ -5,9 +5,61 @@
  */
 //console.log("test");
 "use strict";
-window.onload = function () {
-    console.log("hello")
 
+    
+const chkElderlyPatients = document.getElementById("chkElderlyPatients");
+const chkShowOutPatients = document.getElementById("chkShowOutPatients");
+const tbodyPatientsList = document.getElementById('tbodyPatientsList');
+
+const htmlWrite =  function (patients, tbodyPatientsList) {
+    console.log("patient inside loop ", patients);
+    clearHtml();
+    for (let index = 0; index < patients.length; index++) {
+        let element = patients[index];
+        console.log(index);
+        console.log(element.patientIdNumber);
+        tbodyPatientsList.innerHTML += `
+                                        <tr>
+                                            <td scope="col">${element.patientIdNumber}</td>
+                                            <td scope="col">${element.firstName}</td>
+                                            <td scope="col">${element.middleInitials}</td>
+                                            <td scope="col">${element.lastName}</td>
+                                            <td scope="col">${element.dateOfBirth}</td>
+                                            <td scope="col">${element.ddlDepartment}</td>
+                                            <td scope="col">${element.radioIsOutPatient}</td>
+                                        </tr>
+                                        `;
+    };
+}
+
+function clearHtml() {
+    tbodyPatientsList.innerHTML = "";
+}
+
+//show out patient event  when check box clicked
+
+chkShowOutPatients.addEventListener('change', async function (event) {
+        const getAllPatient = async function () {
+            try {
+                const response = await fetch("http://localhost:9000/registration/patient-data");
+                const books = await response.json();
+                return books;
+            } catch (error) {
+                console.error();
+            }
+        };
+        const patients = await getAllPatient();
+        console.log(patients);
+        
+        if (chkShowOutPatients.checked) {
+           const yesPatients = patients.filter(patient => patient.radioIsOutPatient=="Yes")
+            htmlWrite(yesPatients, tbodyPatientsList);
+        }
+        else {
+            htmlWrite(patients, tbodyPatientsList);
+        }
+
+    });
 
 
     // const chkElderlyPatients = document.getElementById("chkElderlyPatients");
@@ -45,26 +97,7 @@ window.onload = function () {
     // }
 
     // //write to HTML function 
-    // const htmlWrite = function (patientArr, tbodyPatientsList) {
-    //     console.log("patient inside loop ", patientArr);
-    //     clearHtml();
-    //     for (let index = 0; index < patientArr.length; index++) {
-    //         let element = patientArr[index];
-    //         console.log(index);
-    //         console.log(element.patientIdNumber);
-    //         tbodyPatientsList.innerHTML += `
-    //                                     <tr>
-    //                                         <td scope="col">${element.patientIdNumber}</td>
-    //                                         <td scope="col">${element.firstName}</td>
-    //                                         <td scope="col">${element.middleInitials}</td>
-    //                                         <td scope="col">${element.lastName}</td>
-    //                                         <td scope="col">${element.dateOfBirth}</td>
-    //                                         <td scope="col">${element.ddlDepartment}</td>
-    //                                         <td scope="col">${element.patientOut}</td>
-    //                                     </tr>
-    //                                     `;
-    //     };
-    // }
+   
 
     // //=========================== Events =====================================
     // //form event 
@@ -162,6 +195,5 @@ window.onload = function () {
     // });
 
 
-};
 
 
